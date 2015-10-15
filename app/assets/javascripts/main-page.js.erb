@@ -1,0 +1,94 @@
+
+//variables to set the counter
+var seconds = 0, tenSeconds = 0, minutes = 0, tenMinutes = 0, hours = 0; 
+var counterTime, freeTime = 0;
+
+var startTime, stopTime, totalTime;
+
+
+  
+$(document).ready(function(){
+  //starts the initial counter to be 0.
+  updateCounter();
+  updateFreeTime();
+
+  var startButton = $('#start-button'), stopButton = $('#stop-button'), resetButton = $('#reset-button');
+  var interval;
+  disable(stopButton);
+  
+
+  //When this is clicked, the button is disabled, and the time starts.
+  startButton.click(function(){
+    interval = setInterval(function() {
+      seconds += 1;
+      if (seconds == 10) {
+        seconds = 0;
+        tenSeconds += 1;
+        if (tenSeconds == 6) {
+          tenSeconds = 0;
+          minutes += 1;
+          if (minutes == 10) {
+            minutes = 0;
+            tenMinutes += 1;
+            if (tenMinutes == 6) {
+              tenMinutes = 0;
+              hours += 1;
+            }
+          } 
+        } 
+      }
+      freeTime += 1;
+      updateCounter();
+      updateFreeTime();
+    }, 1000);
+
+    if (!startTime) { startTime = setTime(); }
+      
+    disable(startButton);
+    activate(stopButton);
+    disable(resetButton);
+  });
+
+  
+
+  //This shows what happens when the stop button is clicked
+
+  
+
+  stopButton.click(function() {
+    clearInterval(interval);
+    disable(stopButton);
+    activate(startButton);
+    activate(resetButton);
+    
+    stopTime = setTime(); 
+  });
+});
+
+
+function disable(button) {
+  button.prop("disabled", true);
+}
+
+function activate(button) {
+  button.prop("disabled", false);
+}
+
+function setTime(time) {
+  var dateObj = new Date();
+  return dateObj.toLocaleTimeString();
+}
+
+function setCounter (h, tm, m, ts, s) {
+  return h + ":" + tm + m + ":" + ts + s;
+}
+
+function updateCounter() {
+  counterTime = setCounter(hours, tenMinutes, minutes, tenSeconds, seconds);
+  $('#counter').text(counterTime);
+ 
+}
+
+function updateFreeTime() {
+   $('#free').text(freeTime + " seconds");
+}
