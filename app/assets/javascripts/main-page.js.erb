@@ -5,65 +5,104 @@ var counterTime, freeTime = 0;
 
 var startTime, stopTime, totalTime;
 
-
   
 $(document).ready(function(){
-  //starts the initial counter to be 0.
-  updateCounter();
-  updateFreeTime();
+  $.getScript("https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js", function(){
+    //$('#work-toggle').bootstrapToggle();
+    //$('#free-toggle').bootstrapToggle();
+    $('#work-toggle').bootstrapToggle('disable');
+    $('#free-toggle').bootstrapToggle('disable');
 
-  var startButton = $('#start-button'), stopButton = $('#stop-button'), resetButton = $('#reset-button');
-  var interval;
-  disable(stopButton);
-  
-
-  //When this is clicked, the button is disabled, and the time starts.
-  startButton.click(function(){
-    interval = setInterval(function() {
-      seconds += 1;
-      if (seconds == 10) {
-        seconds = 0;
-        tenSeconds += 1;
-        if (tenSeconds == 6) {
-          tenSeconds = 0;
-          minutes += 1;
-          if (minutes == 10) {
-            minutes = 0;
-            tenMinutes += 1;
-            if (tenMinutes == 6) {
-              tenMinutes = 0;
-              hours += 1;
-            }
-          } 
-        } 
+/*
+    $('#work-toggle').change(function(){
+      if ($('#work-toggle').prop("checked")){
+        $('#free-toggle').bootstrapToggle('off')
+      } else {
+        $('#free-toggle').bootstrapToggle('on')
       }
-      freeTime += 1;
-      updateCounter();
-      updateFreeTime();
-    }, 1000);
+    });
+*/
+    //starts the initial counter to be 0.
+    updateCounter();
+    updateFreeTime();
 
-    if (!startTime) { startTime = setTime(); }
-      
-    disable(startButton);
-    activate(stopButton);
-    disable(resetButton);
-  });
-
-  
-
-  //This shows what happens when the stop button is clicked
-
-  
-
-  stopButton.click(function() {
-    clearInterval(interval);
+    var startButton = $('#start-button'), stopButton = $('#stop-button'), resetButton = $('#reset-button');
+    var interval;
     disable(stopButton);
-    activate(startButton);
-    activate(resetButton);
     
-    stopTime = setTime(); 
+
+    //When this is clicked, the button is disabled, and the time starts.
+    startButton.click(function(){
+      interval = setInterval(function() {
+        seconds += 1;
+        if (seconds == 10) {
+          seconds = 0;
+          tenSeconds += 1;
+          if (tenSeconds == 6) {
+            tenSeconds = 0;
+            minutes += 1;
+            if (minutes == 10) {
+              minutes = 0;
+              tenMinutes += 1;
+              if (tenMinutes == 6) {
+                tenMinutes = 0;
+                hours += 1;
+              }
+            } 
+          } 
+        }
+
+
+        if ($('#work-toggle').prop("checked")) {
+          freeTime += 1;
+        } else {
+          freeTime -= 1;
+        }
+
+
+        updateCounter();
+        updateFreeTime();
+      }, 100);
+
+      if (!startTime) { startTime = setTime(); }
+        
+      disable(startButton);
+      activate(stopButton);
+      disable(resetButton);
+    });
+
+    
+
+    //This shows what happens when the stop button is clicked
+
+    stopButton.click(function() {
+      clearInterval(interval);
+      disable(stopButton);
+      activate(startButton);
+      activate(resetButton);
+      
+      stopTime = setTime(); 
+    });
+
+
+    resetButton.click(function(){
+      totalTime = counterTime;
+
+      startTime = undefined;
+
+      seconds = 0; 
+      tenSeconds = 0; 
+      minutes = 0;
+      tenMinutes = 0;
+      hours = 0;
+      
+      updateCounter();
+
+    });
   });
 });
+    
+  
 
 
 function disable(button) {
@@ -90,5 +129,28 @@ function updateCounter() {
 }
 
 function updateFreeTime() {
-   $('#free').text(freeTime + " seconds");
+  if (freeTime >= 60) {
+    var freeMinutes = Math.floor(freeTime/60);
+    var freeSeconds = parseInt(freeTime % 60);
+    if (freeMinutes == 1) {
+      $('#free').text(freeMinutes + " minute " + freeSeconds + " seconds" );
+    }
+    else {
+      $('#free').text(freeMinutes + " minutes " + freeSeconds + " seconds" );
+    }
+    
+  } 
+  else {
+    $('#free').text(freeTime + " seconds");
+  }
+   
+}
+
+function toggle() {
+  $('#free-toggle').bootstrapToggle('enable');
+  $('#free-toggle').bootstrapToggle('toggle');
+  $('#free-toggle').bootstrapToggle('disable');
+  $('#work-toggle').bootstrapToggle('enable');
+  $('#work-toggle').bootstrapToggle('toggle');
+  $('#work-toggle').bootstrapToggle('disable');
 }
