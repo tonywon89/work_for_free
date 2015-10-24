@@ -12,16 +12,7 @@ $(document).ready(function(){
     //$('#free-toggle').bootstrapToggle();
     $('#work-toggle').bootstrapToggle('disable');
     $('#free-toggle').bootstrapToggle('disable');
-
-/*
-    $('#work-toggle').change(function(){
-      if ($('#work-toggle').prop("checked")){
-        $('#free-toggle').bootstrapToggle('off')
-      } else {
-        $('#free-toggle').bootstrapToggle('on')
-      }
-    });
-*/
+  });
     //starts the initial counter to be 0.
     updateCounter();
     updateFreeTime();
@@ -57,14 +48,21 @@ $(document).ready(function(){
           freeTime += 1;
         } else {
           freeTime -= 1;
+
         }
 
 
         updateCounter();
         updateFreeTime();
+        if (freeTime <= 0) {
+          clearInterval(interval);
+          alert("Out of free time")
+          disable(stopButton);
+          activate(resetButton);
+      }
       }, 100);
 
-      if (!startTime) { startTime = setTime(); }
+      //if (!startTime) { startTime = setTime(); }
         
       disable(startButton);
       activate(stopButton);
@@ -81,25 +79,11 @@ $(document).ready(function(){
       activate(startButton);
       activate(resetButton);
       
-      stopTime = setTime(); 
+      //stopTime = setTime(); 
     });
 
 
-    resetButton.click(function(){
-      totalTime = counterTime;
-
-      startTime = undefined;
-
-      seconds = 0; 
-      tenSeconds = 0; 
-      minutes = 0;
-      tenMinutes = 0;
-      hours = 0;
-      
-      updateCounter();
-
-    });
-  });
+    resetButton.click(reset);
 });
     
   
@@ -113,10 +97,22 @@ function activate(button) {
   button.prop("disabled", false);
 }
 
+function reset() {
+  //totalTime = counterTime;
+  //startTime = undefined;
+
+
+  seconds = 0, tenSeconds = 0, minutes = 0, tenMinutes = 0, hours = 0;
+      
+  updateCounter();
+  activate($('#start-button'));
+}
+/*
 function setTime(time) {
   var dateObj = new Date();
   return dateObj.toLocaleTimeString();
 }
+*/
 
 function setCounter (h, tm, m, ts, s) {
   return h + ":" + tm + m + ":" + ts + s;
@@ -153,4 +149,7 @@ function toggle() {
   $('#work-toggle').bootstrapToggle('enable');
   $('#work-toggle').bootstrapToggle('toggle');
   $('#work-toggle').bootstrapToggle('disable');
+  reset();
+
 }
+
