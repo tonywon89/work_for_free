@@ -8,6 +8,7 @@ gem 'sass-rails', '~> 4.0.3'
 gem 'jquery-turbolinks'
 gem 'bootstrap-sass', '3.2.0.0'
 gem "bootstrap-switch-rails"
+gem 'devise'
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .js.coffee assets and views
