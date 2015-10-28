@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   devise_for :users
   root 'static_pages#home'
 
-  get 'static_pages/help'
+  get 'help' => 'static_pages#help'
 
-  get 'static_pages/about'
+  get 'about' => 'static_pages#about'
   #root to: 'application#home'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

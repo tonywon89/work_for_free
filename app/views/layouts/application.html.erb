@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title> <%= yield(:title) %> | Work for Free</title>
+  <title> <%= full_title(yield(:title)) %></title>
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
@@ -9,22 +9,11 @@
   
 </head>
 <body>
-  <header class="navbar navbar-inverse">
-    <div class="container">
-      <%= link_to "Home", root_path, id: "logo" %>
-      <nav>
-        <ul class="nav navbar-nav navbar-right">
-        	<li>Placeholder</li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <%= render 'layouts/header' %>
   <p class="notice"><%= notice %></p>
   <p class="alert"><%= alert %></p>
 
   <%= yield %>
 
-  <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 </body>
 </html>
