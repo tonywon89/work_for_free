@@ -1,24 +1,30 @@
 
 //variables to set the counter
 var seconds = 0, tenSeconds = 0, minutes = 0, tenMinutes = 0, hours = 0; 
-var counterTime, freeTime = 0;
 
-var startTime, stopTime, totalTime;
+var counterTime, freeTime = 0; //will change the free time to load to become what was stored in the database
+
+//var startTime, stopTime, totalTime;
 
   
 $(document).ready(function(){
+  // loads the bootstrap-toggle js library, since the pipeline isn't working
   $.getScript("https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js", function(){
     //$('#work-toggle').bootstrapToggle();
     //$('#free-toggle').bootstrapToggle();
     $('#work-toggle').bootstrapToggle('disable');
     $('#free-toggle').bootstrapToggle('disable');
   });
-    //starts the initial counter to be 0.
+
+    //starts the initial counter and freetime to display.
     updateCounter();
     updateFreeTime();
 
+    //initializes the buttons and interval
     var startButton = $('#start-button'), stopButton = $('#stop-button'), resetButton = $('#reset-button');
     var interval;
+
+    //prevents the stop button from being functional when it is 0
     disable(stopButton);
     
 
@@ -43,7 +49,7 @@ $(document).ready(function(){
           } 
         }
 
-
+        // updates the free time depending on whether the work-toggle button is on
         if ($('#work-toggle').prop("checked")) {
           freeTime += 1;
         } else {
@@ -51,9 +57,11 @@ $(document).ready(function(){
 
         }
 
-
+        // updates the counter and FreeTime in real time
         updateCounter();
         updateFreeTime();
+
+        //stops the time when FreeTime reaches 0
         if (freeTime <= 0) {
           clearInterval(interval);
           alert("Out of free time")
@@ -63,10 +71,12 @@ $(document).ready(function(){
       }, 100);
 
       //if (!startTime) { startTime = setTime(); }
-        
+      
+      //ensures only stop button is functional when the timer is running  
       disable(startButton);
       activate(stopButton);
       disable(resetButton);
+
     });
 
     
@@ -74,6 +84,8 @@ $(document).ready(function(){
     //This shows what happens when the stop button is clicked
 
     stopButton.click(function() {
+
+      //stops time and reactivates and disables buttons
       clearInterval(interval);
       disable(stopButton);
       activate(startButton);
@@ -82,26 +94,25 @@ $(document).ready(function(){
       //stopTime = setTime(); 
     });
 
-
+    //resets counter when reset button is clicked and resets buttons
     resetButton.click(reset);
 });
     
-  
 
-
+// Disables the button so it cannot be clicked  
 function disable(button) {
   button.prop("disabled", true);
 }
 
+// Activates the button so it can be clicked
 function activate(button) {
   button.prop("disabled", false);
 }
 
+// resets the counter and the buttons to initial conditions
 function reset() {
   //totalTime = counterTime;
   //startTime = undefined;
-
-
   seconds = 0, tenSeconds = 0, minutes = 0, tenMinutes = 0, hours = 0;
       
   updateCounter();
@@ -114,20 +125,27 @@ function setTime(time) {
 }
 */
 
+// returns a string of the counter time
 function setCounter (h, tm, m, ts, s) {
   return h + ":" + tm + m + ":" + ts + s;
 }
 
+// updates the counter in real time to display on the webpage
 function updateCounter() {
   counterTime = setCounter(hours, tenMinutes, minutes, tenSeconds, seconds);
   $('#counter').text(counterTime);
  
 }
 
+// updates the display of the free time
 function updateFreeTime() {
   if (freeTime >= 60) {
+
+    // Converts the FreeTime from seconds to minutes and seconds
     var freeMinutes = Math.floor(freeTime/60);
     var freeSeconds = parseInt(freeTime % 60);
+
+    // To display plural minutes or singular
     if (freeMinutes == 1) {
       $('#free').text(freeMinutes + " minute " + freeSeconds + " seconds" );
     }
@@ -135,13 +153,13 @@ function updateFreeTime() {
       $('#free').text(freeMinutes + " minutes " + freeSeconds + " seconds" );
     }
     
-  } 
-  else {
+  } else {
     $('#free').text(freeTime + " seconds");
   }
    
 }
 
+// Toggles the buttons and resets the counter. Disables toggle so it cannot be clicked
 function toggle() {
   $('#free-toggle').bootstrapToggle('enable');
   $('#free-toggle').bootstrapToggle('toggle');
