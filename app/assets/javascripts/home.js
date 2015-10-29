@@ -26,7 +26,6 @@ $(document).ready(function(){
     //prevents the stop button from being functional when it is 0
     disable(stopButton);
     
-
     //When this is clicked, the button is disabled, and the time starts.
     startButton.click(function(){
       interval = setInterval(function() {
@@ -49,11 +48,10 @@ $(document).ready(function(){
         }
 
         // updates the free time depending on whether the work-toggle button is on
-        if ($('#work-toggle').prop("checked")) {
+        if ($(':radio[value=work]').prop("checked")) {
           freeTime += 1;
         } else {
           freeTime -= 1;
-
         }
 
         // updates the counter and FreeTime in real time
@@ -112,6 +110,7 @@ function reset() {
   //totalTime = counterTime;
   //startTime = undefined;
 
+  //resets the counter time
   seconds = 0, tenSeconds = 0, minutes = 0, tenMinutes = 0, hours = 0;
       
   updateCounter();
