@@ -17,8 +17,7 @@ $(document).ready(function(){
   });
 
     //starts the initial counter and freetime to display.
-    updateCounter();
-    updateFreeTime();
+    updateAll();
 
     //initializes the buttons and interval
     var startButton = $('#start-button'), stopButton = $('#stop-button'), resetButton = $('#reset-button');
@@ -58,8 +57,7 @@ $(document).ready(function(){
         }
 
         // updates the counter and FreeTime in real time
-        updateCounter();
-        updateFreeTime();
+        updateAll();
 
         //stops the time when FreeTime reaches 0
         if (freeTime <= 0) {
@@ -162,10 +160,14 @@ function updateFreeTime() {
   } else {
     $('#free').text(freeTime + " seconds");
   }
-
-
-   
 }
+
+function updateAll() {
+  updateCounter();
+  updateFreeTime();
+}
+   
+
 
 // Toggles the buttons and resets the counter. Disables toggle so it cannot be clicked
 function toggle() {
