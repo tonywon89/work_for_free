@@ -113,10 +113,16 @@ function activate(button) {
 function reset() {
   //totalTime = counterTime;
   //startTime = undefined;
+
   seconds = 0, tenSeconds = 0, minutes = 0, tenMinutes = 0, hours = 0;
       
   updateCounter();
   activate($('#start-button'));
+
+
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("GET", "http://localhost:3000/home?ftime=" + freeTime, true);
+  xhttp.send();
 }
 /*
 function setTime(time) {
@@ -156,6 +162,8 @@ function updateFreeTime() {
   } else {
     $('#free').text(freeTime + " seconds");
   }
+
+
    
 }
 
