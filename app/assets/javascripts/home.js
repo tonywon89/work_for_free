@@ -2,7 +2,7 @@
 //variables to set the counter
 var seconds = 0, tenSeconds = 0, minutes = 0, tenMinutes = 0, hours = 0; 
 
-var counterTime, freeTime = 0; //will change the free time to load to become what was stored in the database
+var counterTime, freeTime = gon.freeTime; //will change the free time to load to become what was stored in the database
 
 //var startTime, stopTime, totalTime;
 
