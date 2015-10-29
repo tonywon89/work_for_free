@@ -92,6 +92,13 @@ $(document).ready(function(){
 
     //resets counter when reset button is clicked and resets buttons
     resetButton.click(reset);
+
+    $(':radio').click(function(){
+      clearInterval(interval);
+      disable(stopButton);
+      activate(resetButton);
+      
+    });
 });
     
 
@@ -167,7 +174,7 @@ function updateAll() {
 }
    
 
-
+/*
 // Toggles the buttons and resets the counter. Disables toggle so it cannot be clicked
 function toggle() {
   $('#free-toggle').bootstrapToggle('enable');
@@ -177,6 +184,5 @@ function toggle() {
   $('#work-toggle').bootstrapToggle('toggle');
   $('#work-toggle').bootstrapToggle('disable');
   reset();
-
 }
-
+*/
