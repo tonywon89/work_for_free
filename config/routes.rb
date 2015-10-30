@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
 
+  get  'buttons/new'
+  post 'buttons/create'
+  delete 'buttons/destroy'
+
   devise_for :users
   root 'static_pages#home'
 

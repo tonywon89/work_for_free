@@ -20,10 +20,14 @@
         <h3 class="text-center"> Work </h3>
 
         <!-- Create all the work radio buttons --> 
-        <% @description.each do |i| %>
-          <% if i.is_work %>
-            <%= radio_button_tag 'work-free', 'work' %> <%= i.description %>
-          <% end %> 
+        <% if current_user %>
+          <% id_num = 0 %>
+          <% @workRelaxButtons.each do |i| %>
+            <% if i.is_work %>
+              <%= radio_button_tag 'work-free', 'work', true %> <%= i.description %>
+              <% id_num += 1 %>
+            <% end %> 
+          <% end %>
         <% end %>
        
     </div>
@@ -31,10 +35,14 @@
         <h3 class="text-center"> Relax </h3>
 
          <!-- Create all the relax radio buttons -->
-        <% @description.each do |i| %>
-          <% if !i.is_work %>
-            <%= radio_button_tag 'work-free', 'relax' %> <%= i.description %>
-          <% end %> 
+        <% if current_user %>
+          <% id_num = 100 %>
+          <% @workRelaxButtons.each do |i| %>
+            <% if !i.is_work %>
+              <%= radio_button_tag 'work-free', 'free' %> <%= i.description %>
+              <% id_num += 1 %>
+            <% end %> 
+          <% end %>
         <% end %>
     </div>
   </div>
@@ -55,7 +63,7 @@
 </div>
 
 <div class="container">
-  
+  <%= link_to "Create button", buttons_new_path, class: 'btn btn-primary btn-block' %>
 </div>
 
 

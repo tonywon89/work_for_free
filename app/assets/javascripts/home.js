@@ -48,7 +48,7 @@ $(document).ready(function(){
         }
 
         // updates the free time depending on whether the work-toggle button is on
-        if ($(':radio[value=work]').prop("checked")) {
+        if ($('input[type=radio][value=work]:checked').val() == "work") {
           freeTime += 1;
         } else {
           freeTime -= 1;
@@ -172,7 +172,23 @@ function updateAll() {
   updateCounter();
   updateFreeTime();
 }
-   
+
+function workRadiosChecked() {
+  var string = "";
+  var id_num = 0;
+  for (var i = 0, n = gon.workRelaxButtons.length; i < n ; i++){
+    if (gon.workRelaxButtons[i]["is_work"]) {
+      string += "($('input:radio[value=" + id_num + "]').prop('checked'))" 
+      if (i != n - 1) {
+        string += "||";
+      }
+    }
+    id_num += 1;
+  }
+  return string;
+    
+
+}
 
 /*
 // Toggles the buttons and resets the counter. Disables toggle so it cannot be clicked

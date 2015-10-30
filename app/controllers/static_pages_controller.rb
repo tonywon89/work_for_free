@@ -19,12 +19,13 @@ class StaticPagesController < ApplicationController
       end
       @freeTime = FreeTime.find(current_user.free_time_id).free_time # assign the free time to be used by the view
       user_id = current_user.id
-      @description = WorkRelaxButton.where("user_id = #{current_user.id}")
+      @workRelaxButtons = WorkRelaxButton.where("user_id = #{current_user.id}")
       
     else 
       @freeTime = 0
     end
     gon.freeTime = @freeTime
+    gon.workRelaxButtons = @workRelaxButtons
 
   end
 
