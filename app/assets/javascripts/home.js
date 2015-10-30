@@ -25,6 +25,7 @@ $(document).ready(function(){
 
     //prevents the stop button from being functional when it is 0
     disable(stopButton);
+    disable(resetButton);
     
     //When this is clicked, the button is disabled, and the time starts.
     startButton.click(function(){
@@ -97,7 +98,7 @@ $(document).ready(function(){
       clearInterval(interval);
       disable(stopButton);
       activate(resetButton);
-      
+      reset();
     });
 });
     
@@ -122,7 +123,7 @@ function reset() {
       
   updateCounter();
   activate($('#start-button'));
-
+  disable($('#reset-button'))
 
   var xhttp = new XMLHttpRequest();
   xhttp.open("GET", "http://localhost:3000/home?ftime=" + freeTime, true);
@@ -173,22 +174,6 @@ function updateAll() {
   updateFreeTime();
 }
 
-function workRadiosChecked() {
-  var string = "";
-  var id_num = 0;
-  for (var i = 0, n = gon.workRelaxButtons.length; i < n ; i++){
-    if (gon.workRelaxButtons[i]["is_work"]) {
-      string += "($('input:radio[value=" + id_num + "]').prop('checked'))" 
-      if (i != n - 1) {
-        string += "||";
-      }
-    }
-    id_num += 1;
-  }
-  return string;
-    
-
-}
 
 /*
 // Toggles the buttons and resets the counter. Disables toggle so it cannot be clicked
