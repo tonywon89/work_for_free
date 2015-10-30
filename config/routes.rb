@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   delete 'buttons/destroy'
 
   devise_for :users
+  resources :users do 
+    resource :summary 
+  end
   root 'static_pages#home'
 
   get 'home' => 'static_pages#home'

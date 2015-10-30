@@ -126,7 +126,7 @@ function reset() {
   disable($('#reset-button'))
 
   var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "http://localhost:3000/home?ftime=" + freeTime, true);
+  xhttp.open("GET", "http://localhost:3000/users/" + gon.user["id"] + "?ftime=" + freeTime, true);
   xhttp.send();
 }
 /*
