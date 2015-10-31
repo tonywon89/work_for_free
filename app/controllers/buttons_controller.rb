@@ -13,7 +13,7 @@ class ButtonsController < ApplicationController
     end
     WorkRelaxButton.create(is_work: params[:buttons][:work_relax], description: params[:buttons][:description],
       user_id: current_user.id)
-    redirect_to root_path
+    redirect_to current_user
   end
 
   def destroy

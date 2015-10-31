@@ -1,19 +1,19 @@
 Rails.application.routes.draw do
-
-  get  'buttons/new'
-  post 'buttons/create'
-  delete 'buttons/destroy'
-
-  devise_for :users
-  resources :users do 
-    resource :summary 
-  end
   root 'static_pages#home'
 
   get 'home' => 'static_pages#home'
   get 'help' => 'static_pages#help'
 
   get 'about' => 'static_pages#about'
+  get  'buttons/new'
+  post 'buttons/create'
+  delete 'buttons/destroy'
+
+  devise_for :users
+  
+  resources :users, only: [:show]
+  
+
   #root to: 'application#home'
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
