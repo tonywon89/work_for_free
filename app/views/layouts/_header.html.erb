@@ -12,7 +12,8 @@
         <div class="collapse navbar-collapse" id="main-nav-collapse">
           <div id="nav-buttons" class="nav navbar-nav navbar-right">
             <% if current_user %>
-              <%= link_to current_user.email, user_path(id: 1), method: :get, class: "navbar-btn" %>
+              <% user = current_user %>
+              <%= link_to current_user.email, user_path(id: user.id), method: :get, class: "navbar-btn" %>
               <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-primary navbar-btn" %>
             <% else %>
               <%= link_to 'Log in', new_user_session_path, class: "btn btn-primary navbar-btn" %>
