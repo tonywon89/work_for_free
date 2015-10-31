@@ -2,8 +2,6 @@ class UsersController < ApplicationController
   def show 
     @user = User.find(params[:id])
 
-
-
     if current_user && request.get? && params.has_key?(:ftime)
       free = FreeTime.find(current_user.free_time_id)
       free.update(free_time: params[:ftime].to_i, user_id: current_user.id)
@@ -28,7 +26,7 @@ class UsersController < ApplicationController
       end
       @freeTime = FreeTime.find(current_user.free_time_id).free_time # assign the free time to be used by the view
       user_id = current_user.id
-      @workRelaxButtons = WorkRelaxButton.where("user_id = #{current_user.id}")
+      @workRelaxButtons = WorkRelaxButton.where("user_id = ?", user_id)
       
     else 
       @freeTime = 0

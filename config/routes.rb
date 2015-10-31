@@ -5,13 +5,19 @@ Rails.application.routes.draw do
   get 'help' => 'static_pages#help'
 
   get 'about' => 'static_pages#about'
-  get  'buttons/new'
+
+  get 'buttons/new'
+  get 'buttons/edit'
   post 'buttons/create'
+  get 'buttons/update'
+  patch 'buttons/update'
   delete 'buttons/destroy'
 
   devise_for :users
   
-  resources :users, only: [:show]
+  resources :users, only: [:show] do 
+    resource :summary
+  end
   
 
   #root to: 'application#home'

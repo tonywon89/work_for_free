@@ -1,0 +1,31 @@
+<h2>Edit Buttons</h2>
+
+<div class="container"> 
+  
+
+  <h5>Work Buttons</h5>
+
+  <ul style="list-style:none">
+    <% @buttons.each do |i| %>
+      <% if i.is_work %>
+        <li>
+          <%= check_box_tag i.description, i.description %> <%= i.description %> 
+          <%= link_to "Edit", buttons_update_path(:button_id => i.id), method: :get, class: "btn btn-warning" %>
+        </li>
+      <% end %>
+    <% end %>
+  </ul>
+
+  <h5>Relax Buttons</h5>
+  <ul style="list-style:none">
+    <% @buttons.each do |i| %>
+      <% if !i.is_work %>
+        <li> 
+          <%= check_box_tag i.description, i.description %> <%= i.description %> 
+          <%= link_to "Edit", buttons_update_path(:button_id => i.id), method: :get, class: "btn btn-warning" %>
+        </li>
+
+      <% end %>
+    <% end %>
+  </ul>
+</div>

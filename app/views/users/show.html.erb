@@ -63,5 +63,13 @@
 </div>
 
 <div class="container">
-  <%= link_to "Create button", buttons_new_path, class: 'btn btn-primary btn-block' %>
+  <div class="row">
+    <div class="col-md-6">
+      <%= link_to "Create Button", buttons_new_path, class: 'btn btn-primary btn-block' %>
+    </div>
+    <div class="col-md-6">
+      <%= link_to "Edit Buttons", buttons_edit_path, class: 'btn btn-danger btn-block' %>
+    </div>
+  </div>
+  
 </div>
