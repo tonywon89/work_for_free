@@ -8,6 +8,7 @@ var counterTime, freeTime = gon.freeTime; //will change the free time to load to
 
   
 $(document).ready(function(){
+ /*
   // loads the bootstrap-toggle js library, since the pipeline isn't working
   $.getScript("https://gitcdn.github.io/bootstrap-toggle/2.2.0/js/bootstrap-toggle.min.js", function(){
     //$('#work-toggle').bootstrapToggle();
@@ -15,7 +16,7 @@ $(document).ready(function(){
     $('#work-toggle').bootstrapToggle('disable');
     $('#free-toggle').bootstrapToggle('disable');
   });
-
+*/
     //starts the initial counter and freetime to display.
     updateAll();
 
