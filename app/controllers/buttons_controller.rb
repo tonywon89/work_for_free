@@ -24,6 +24,7 @@ class ButtonsController < ApplicationController
   def update
     if request.get?
       @button = WorkRelaxButton.find(params[:button_id])
+
     else
       if params[:buttons][:work_relax] === "true"
         params[:buttons][:work_relax] = true
@@ -37,5 +38,9 @@ class ButtonsController < ApplicationController
   end
 
   def destroy
+    params[:delete].each do |id|
+      WorkRelaxButton.find(id[0].to_i).destroy
+    end
+    redirect_to current_user
   end
 end

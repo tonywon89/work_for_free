@@ -6,6 +6,8 @@ Rails.application.routes.draw do
 
   get 'about' => 'static_pages#about'
 
+  
+
   get 'buttons/new'
   get 'buttons/edit'
   post 'buttons/create'

@@ -2,30 +2,32 @@
 
 <div class="container"> 
   
+  <%= form_tag buttons_destroy_path, method: :delete do %>
+    <h5>Work Buttons</h5>
 
-  <h5>Work Buttons</h5>
-
-  <ul style="list-style:none">
-    <% @buttons.each do |i| %>
-      <% if i.is_work %>
-        <li>
-          <%= check_box_tag i.description, i.description %> <%= i.description %> 
-          <%= link_to "Edit", buttons_update_path(:button_id => i.id), method: :get, class: "btn btn-warning" %>
-        </li>
+    <ul style="list-style:none">
+      <% @buttons.each do |i| %>
+        <% if i.is_work %>
+          <li>
+            <%= check_box_tag "delete[#{i.id}]", i.description %> <%= i.description %> 
+            <%= link_to "Edit", buttons_update_path(:button_id => i.id), method: :get %>
+          </li>
+        <% end %>
       <% end %>
-    <% end %>
-  </ul>
+    </ul>
 
-  <h5>Relax Buttons</h5>
-  <ul style="list-style:none">
-    <% @buttons.each do |i| %>
-      <% if !i.is_work %>
-        <li> 
-          <%= check_box_tag i.description, i.description %> <%= i.description %> 
-          <%= link_to "Edit", buttons_update_path(:button_id => i.id), method: :get, class: "btn btn-warning" %>
-        </li>
+    <h5>Relax Buttons</h5>
+    <ul style="list-style:none">
+      <% @buttons.each do |i| %>
+        <% if !i.is_work %>
+          <li> 
+            <%= check_box_tag "delete[#{i.id}]", i.description %> <%= i.description %> 
+            <%= link_to "Edit", buttons_update_path(:button_id => i.id), method: :get %>
+          </li>
 
+        <% end %>
       <% end %>
-    <% end %>
-  </ul>
+    </ul>
+    <%= submit_tag "Delete Selected", class: "btn btn-danger" %>
+  <% end %>
 </div>
