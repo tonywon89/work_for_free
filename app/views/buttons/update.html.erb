@@ -1,3 +1,19 @@
 <h2>Update Button Page</h2>
 
-<%= @button.description %>
+<p> Edit: "<%= @button.description %>" Button  </p>
+
+<%= form_for(:buttons, url: buttons_update_path(button_id: params[:button_id]), method: :patch) do |f| %>
+
+  <div class="form-group">
+    <%= f.label :work_relax, "Work or Relax Button" %>
+    <%= f.select :work_relax, [["Work", true], ["Relax", false]] %>
+  </div>
+
+  <div class="form-group">
+    <%= f.label :description, "Description" %>
+    <%= f.text_field :description, class: 'form-control' %>
+  </div>
+
+  <%= f.submit "Update Button", class: 'btn btn-success' %>
+
+<% end %>

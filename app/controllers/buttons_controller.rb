@@ -25,7 +25,14 @@ class ButtonsController < ApplicationController
     if request.get?
       @button = WorkRelaxButton.find(params[:button_id])
     else
-    
+      if params[:buttons][:work_relax] === "true"
+        params[:buttons][:work_relax] = true
+      else
+        params[:buttons][:work_relax] = false
+      end
+      button = WorkRelaxButton.find(params[:button_id])
+      button.update(is_work: params[:buttons][:work_relax], description: params[:buttons][:description])
+      redirect_to current_user
     end
   end
 
