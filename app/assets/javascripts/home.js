@@ -103,11 +103,15 @@ $(document).ready(function(){
     //resets counter when reset button is clicked and resets buttons
     resetButton.click(reset);
 
+    // Stops the timer, and saves the data 
     $(':radio').click(function(){
-      clearInterval(interval);
-      disable(stopButton);
-      activate(resetButton);
-      reset($storedButton);
+      if (timer) {
+        clearInterval(interval);
+        disable(stopButton);
+        activate(resetButton);
+        reset();
+      }
+
     });
 });
     
@@ -139,19 +143,29 @@ function reset() {
 
   // Check if timer is running, and only execute if it is
   if (timer) {
+    // Determine if button selected is work or not 
     var workOrRelax;
+
+    // The description of the activity
     var description;
+
+    //Set the workOrRelax value to be a boolean instead of a string
     if ($storedButton.val() == "work") {
       workOrRelax = true;
     } else {
       workOrRelax = false;
     }
+
+    // stores the description as the class of the stored button
     description = $storedButton.attr('class');
 
+    // Sends an AJAX request to the users controller, show action in order to save the data as a record 
     var xhttp = new XMLHttpRequest();
     xhttp.open("GET", "http://localhost:3000/users/" + gon.user["id"] + "?ftime=" + freeTime + 
     "&is_work=" + workOrRelax + "&description=" + description + "&stime=" + spentTime, true);
     xhttp.send();
+
+    // sets the timer to not be running
     timer = false;
   }
 

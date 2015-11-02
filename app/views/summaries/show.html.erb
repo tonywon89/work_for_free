@@ -2,4 +2,8 @@
 
 <% @records.each do |record| %>
   <p><%= record.description %>:  <%=record.time_spent %> second, Category: <%= record.is_work %></p>
+
 <% end %>
+
+  <p> Total work: <%= @totalWork %> seconds </p>
+  <p> Total relax: <%= @totalRelax %> seconds </p>
