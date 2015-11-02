@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  is_work: false
+  description: MyString
+  time_spent: 1
+
+two:
+  is_work: false
+  description: MyString
+  time_spent: 1
