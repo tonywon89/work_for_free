@@ -1,8 +1,7 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-/* for bootstrap3 */
-@import "bootstrap3-switch";
+
 
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
@@ -33,6 +32,18 @@
 }
 
 
+/* User show page */
+
+@media screen and ( min-width: 992px ) {
+  .border-left {
+    border-left: 1px solid black;
+  }
+}
+
+#counter {
+  font-size: 50px;
+  font-family: monospace;
+}
 
 /* miscellaneous */
 
