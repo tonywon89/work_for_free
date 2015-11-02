@@ -4,6 +4,8 @@ var seconds = 0, tenSeconds = 0, minutes = 0, tenMinutes = 0, hours = 0;
 
 var counterTime, freeTime = gon.freeTime, spentTime = 0; //will change the free time to load to become what was stored in the database
 
+var timer = false
+var $storedButton;
 //var startTime, stopTime, totalTime;
 
   
@@ -24,12 +26,14 @@ $(document).ready(function(){
     var startButton = $('#start-button'), stopButton = $('#stop-button'), resetButton = $('#reset-button');
     var interval;
 
+
     //prevents the stop button from being functional when it is 0
     disable(stopButton);
     disable(resetButton);
     
     //When this is clicked, the button is disabled, and the time starts.
     startButton.click(function(){
+      timer = true;
       interval = setInterval(function() {
         seconds += 1;
         if (seconds == 10) {
@@ -55,6 +59,8 @@ $(document).ready(function(){
         } else {
           freeTime -= 1;
         }
+
+        $storedButton = $('input[type=radio]:checked')
 
         spentTime += 1;
 
@@ -101,10 +107,12 @@ $(document).ready(function(){
       clearInterval(interval);
       disable(stopButton);
       activate(resetButton);
-      reset();
+      reset($storedButton);
     });
 });
     
+
+
 
 // Disables the button so it cannot be clicked  
 function disable(button) {
@@ -128,19 +136,26 @@ function reset() {
   activate($('#start-button'));
   disable($('#reset-button'))
 
-  var workOrRelax;
-  var description;
-  if ($('input[type=radio]:checked').val() == "work") {
-    workOrRelax = true;
-  } else {
-    workOrRelax = false;
-  }
-  description = $('input[type=radio]:checked').attr('class');
 
-  var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "http://localhost:3000/users/" + gon.user["id"] + "?ftime=" + freeTime + 
-   "&is_work=" + workOrRelax + "&description=" + description + "&stime=" + spentTime, true);
-  xhttp.send();
+  // Check if timer is running, and only execute if it is
+  if (timer) {
+    var workOrRelax;
+    var description;
+    if ($storedButton.val() == "work") {
+      workOrRelax = true;
+    } else {
+      workOrRelax = false;
+    }
+    description = $storedButton.attr('class');
+
+    var xhttp = new XMLHttpRequest();
+    xhttp.open("GET", "http://localhost:3000/users/" + gon.user["id"] + "?ftime=" + freeTime + 
+    "&is_work=" + workOrRelax + "&description=" + description + "&stime=" + spentTime, true);
+    xhttp.send();
+    timer = false;
+  }
+
+
 
   //console.log(gon.workRelaxButtons)
   

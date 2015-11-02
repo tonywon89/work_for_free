@@ -1,5 +1,5 @@
 <h2>Summary</h2>
 
 <% @records.each do |record| %>
-  <p><%= record.description %></p>
+  <p><%= record.description %>:  <%=record.time_spent %> second, Category: <%= record.is_work %></p>
 <% end %>
