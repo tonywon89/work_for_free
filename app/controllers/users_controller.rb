@@ -28,11 +28,12 @@ class UsersController < ApplicationController
       user_id = current_user.id
       @workRelaxButtons = WorkRelaxButton.where("user_id = ?", user_id)
       
+      gon.freeTime = @freeTime
+      gon.workRelaxButtons = @workRelaxButtons
+      gon.user = @user
     else 
-      @freeTime = 0
+      redirect_to new_user_session_path
     end
-    gon.freeTime = @freeTime
-    gon.workRelaxButtons = @workRelaxButtons
-    gon.user = @user
+
   end
 end
