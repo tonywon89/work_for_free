@@ -161,7 +161,7 @@ function reset() {
 
     // Sends an AJAX request to the users controller, show action in order to save the data as a record 
     var xhttp = new XMLHttpRequest();
-    xhttp.open("GET", "http://localhost:3000/users/" + gon.user["id"] + "?ftime=" + freeTime + 
+    xhttp.open("GET", "/users/" + gon.user["id"] + "?ftime=" + freeTime + 
     "&is_work=" + workOrRelax + "&description=" + description + "&stime=" + spentTime, true);
     xhttp.send();
 
