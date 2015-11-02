@@ -1,9 +1,50 @@
 <h2>Summary</h2>
 
-<% @records.each do |record| %>
-  <p><%= record.description %>:  <%=record.time_spent %> second, Category: <%= record.is_work %></p>
+<table class="table table-bordered">
+  <thead>
+    <tr>
+      <th>Category</th>
+      <th>Description</th>
+      <th>Start Time</th>
+      <th>End Time</th>
+      <th>Time Spent</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @records.each do |record| %>
+      <% time_spent = record.time_spent %>
+      <tr>
+        <td> <%= record.is_work ? "Work" : "Relax"  %> </td>
+        <td> <%= record.description %> </td>
+        <td> <%= record.created_at %> </td>
+        <td> <%= record.created_at + time_spent %> </td>
+        <% if time_spent >= 60 %>
+          <% minutes = time_spent / 60 %>
+          <% seconds = time_spent - (minutes * 60) %>
+          <td> <%= minutes %> minutes <%= seconds %> seconds </td>
+        <% else %>
+          <td> <%= time_spent %> seconds</td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
 
-<% end %>
+</table>
+  
+  <% if @totalWork >= 60 %>
+    <% totalMin = @totalWork / 60 %>
+    <% totalSecs = @totalWork - (totalMin * 60) %>
+    <p> Total work: <%=  totalMin %> minutes <%= totalSecs %> seconds </p>
+  <% else %>
+    <p> Total work: <%= @totalWork %> seconds </p>
+  <% end %>
 
-  <p> Total work: <%= @totalWork %> seconds </p>
+  <% if @totalRelax >= 60 %>
+    <% totalMin = @totalRelax / 60 %>
+    <% totalSecs = @totalRelax - (totalMin * 60) %>
+    <p> Total work: <%=  totalMin %> minutes <%= totalSecs %> seconds </p>
+  <% else %>
+    <p> Total work: <%= @totalRelax %> seconds </p>
+  <% end %>
+
   <p> Total relax: <%= @totalRelax %> seconds </p>
