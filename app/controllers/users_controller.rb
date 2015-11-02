@@ -5,8 +5,19 @@ class UsersController < ApplicationController
     if current_user && request.get? && params.has_key?(:ftime)
       free = FreeTime.find(current_user.free_time_id)
       free.update(free_time: params[:ftime].to_i, user_id: current_user.id)
-      params.delete :ftime
 
+      if params[:is_work] === "true"
+        params[:is_work] = true
+      else
+        params[:is_work] = false
+      end
+      record = current_user.records.create(is_work: params[:is_work], description: params[:description], 
+        time_spent: params[:stime])
+      
+      params.delete :ftime
+      params.delete :is_work
+      params.delete :description
+      params.delete :stime
     end
 
     if current_user

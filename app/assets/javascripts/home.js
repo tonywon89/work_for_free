@@ -2,7 +2,7 @@
 //variables to set the counter
 var seconds = 0, tenSeconds = 0, minutes = 0, tenMinutes = 0, hours = 0; 
 
-var counterTime, freeTime = gon.freeTime; //will change the free time to load to become what was stored in the database
+var counterTime, freeTime = gon.freeTime, spentTime = 0; //will change the free time to load to become what was stored in the database
 
 //var startTime, stopTime, totalTime;
 
@@ -50,11 +50,13 @@ $(document).ready(function(){
         }
 
         // updates the free time depending on whether the work-toggle button is on
-        if ($('input[type=radio][value=work]:checked').val() == "work") {
+        if ($('input[type=radio]:checked').val() == "work") {
           freeTime += 1;
         } else {
           freeTime -= 1;
         }
+
+        spentTime += 1;
 
         // updates the counter and FreeTime in real time
         updateAll();
@@ -126,9 +128,23 @@ function reset() {
   activate($('#start-button'));
   disable($('#reset-button'))
 
+  var workOrRelax;
+  var description;
+  if ($('input[type=radio]:checked').val() == "work") {
+    workOrRelax = true;
+  } else {
+    workOrRelax = false;
+  }
+  description = $('input[type=radio]:checked').attr('class');
+
   var xhttp = new XMLHttpRequest();
-  xhttp.open("GET", "http://localhost:3000/users/" + gon.user["id"] + "?ftime=" + freeTime, true);
+  xhttp.open("GET", "http://localhost:3000/users/" + gon.user["id"] + "?ftime=" + freeTime + 
+   "&is_work=" + workOrRelax + "&description=" + description + "&stime=" + spentTime, true);
   xhttp.send();
+
+  //console.log(gon.workRelaxButtons)
+  
+  spentTime = 0;
 }
 /*
 function setTime(time) {

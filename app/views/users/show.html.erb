@@ -24,7 +24,7 @@
           <% id_num = 0 %>
           <% @workRelaxButtons.each do |i| %>
             <% if i.is_work %>
-              <%= radio_button_tag 'work-free', 'work', true %> <%= i.description %>
+              <%= radio_button_tag 'work-free', 'work', true, class: i.description %> <%= i.description %>
               <% id_num += 1 %>
             <% end %> 
           <% end %>
@@ -39,7 +39,7 @@
           <% id_num = 100 %>
           <% @workRelaxButtons.each do |i| %>
             <% if !i.is_work %>
-              <%= radio_button_tag 'work-free', 'free' %> <%= i.description %>
+              <%= radio_button_tag 'work-free', 'free', class: i.description %> <%= i.description %>
               <% id_num += 1 %>
             <% end %> 
           <% end %>
