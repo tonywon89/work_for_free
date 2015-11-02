@@ -18,33 +18,12 @@
         <td> <%= record.description %> </td>
         <td> <%= record.created_at %> </td>
         <td> <%= record.created_at + time_spent %> </td>
-        <% if time_spent >= 60 %>
-          <% minutes = time_spent / 60 %>
-          <% seconds = time_spent - (minutes * 60) %>
-          <td> <%= minutes %> minutes <%= seconds %> seconds </td>
-        <% else %>
-          <td> <%= time_spent %> seconds</td>
-        <% end %>
+        <td> <%= total_time(time_spent) %> </td>
       </tr>
     <% end %>
   </tbody>
 
 </table>
   
-  <% if @totalWork >= 60 %>
-    <% totalMin = @totalWork / 60 %>
-    <% totalSecs = @totalWork - (totalMin * 60) %>
-    <p> Total work: <%=  totalMin %> minutes <%= totalSecs %> seconds </p>
-  <% else %>
-    <p> Total work: <%= @totalWork %> seconds </p>
-  <% end %>
-
-  <% if @totalRelax >= 60 %>
-    <% totalMin = @totalRelax / 60 %>
-    <% totalSecs = @totalRelax - (totalMin * 60) %>
-    <p> Total work: <%=  totalMin %> minutes <%= totalSecs %> seconds </p>
-  <% else %>
-    <p> Total work: <%= @totalRelax %> seconds </p>
-  <% end %>
-
-  <p> Total relax: <%= @totalRelax %> seconds </p>
+<p>Total Work: <%= total_time(@totalWork) %> </p>
+<p>Total Relax: <%= total_time(@totalRelax) %> </p>
