@@ -6,5 +6,5 @@ class User < ActiveRecord::Base
 
   has_one :free_time
   has_many :work_relax_buttons
-  has_one :summary
+  has_many :records
 end
