@@ -1,18 +1,15 @@
-<h2>Timer</h2>
-
 <div class="container text-center">
   <p id="counter"></p>
   <button id="start-button" type="button" class="btn btn-success">Start</button>
   <button id="stop-button" type="button" class="btn btn-danger">Stop</button>
-  <button id="reset-button" type="button" class="btn btn-primary">Reset/Save
-  </button>
+  <button id="reset-button" type="button" class="btn btn-primary">Reset/Save</button>
 </div>
+<hr/>
 
-<h2>Time stored</h2>
-<p> Free Time: <span id="free"></span></p>
+<h3>Free Time Stored:</h3>
+<div><span id="free"></span> </div>
 
-
-<h2>Activity</h2>
+<hr/>
 
 <div class="container">
   <div class="row well">
@@ -23,7 +20,7 @@
           <% if current_user %>
             <% @workRelaxButtons.each do |i| %>
               <% if i.is_work %>
-                <p><%= radio_button_tag 'work-free', 'work', true, class: i.description %> <%= i.description %></p>
+                <p class="activity"><%= radio_button_tag 'work-free', 'work', true, class: i.description %> <%= i.description %></p>
               <% end %> 
             <% end %>
           <% end %>
@@ -36,7 +33,7 @@
           <% if current_user %>
             <% @workRelaxButtons.each do |i| %>
               <% if !i.is_work %>
-                <p><%= radio_button_tag 'work-free', 'free', false, class: i.description %> <%= i.description %> </p>
+                <p class="activity"><%= radio_button_tag 'work-free', 'free', false, class: i.description %> <%= i.description %> </p>
               <% end %> 
             <% end %>
           <% end %>
