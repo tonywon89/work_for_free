@@ -1,6 +1,13 @@
 <h2>Summary</h2>
 
-<table class="table table-bordered">
+<div class="container">
+  <div class="row"> 
+    <div class="col-md-6">  <%= image_tag @work_graph %> </div>
+    <div class="col-md-6">  <%= image_tag @relax_graph %> </div>
+  </div> 
+</div>
+<div>
+  <table class="table table-bordered">
   <thead>
     <tr>
       <th>Category</th>
@@ -27,3 +34,5 @@
   
 <p>Total Work: <%= total_time(@totalWork) %> </p>
 <p>Total Relax: <%= total_time(@totalRelax) %> </p>
+</div>
+
