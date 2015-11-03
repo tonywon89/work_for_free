@@ -1,38 +1,57 @@
-<h2>Summary</h2>
+<h1>Summary</h1>
 
-<div class="container">
-  <div class="row"> 
-    <div class="col-md-6">  <%= image_tag @work_graph %> </div>
-    <div class="col-md-6">  <%= image_tag @relax_graph %> </div>
-  </div> 
-</div>
+
+
 <div>
+  <h3>Work Summary</h3>
   <table class="table table-bordered">
-  <thead>
-    <tr>
-      <th>Category</th>
-      <th>Description</th>
-      <th>Start Time</th>
-      <th>End Time</th>
-      <th>Time Spent</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @records.each do |record| %>
-      <% time_spent = record.time_spent %>
+    <thead>
       <tr>
-        <td> <%= record.is_work ? "Work" : "Relax"  %> </td>
-        <td> <%= record.description %> </td>
-        <td> <%= record.created_at %> </td>
-        <td> <%= record.created_at + time_spent %> </td>
-        <td> <%= total_time(time_spent) %> </td>
+        <th>Description</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Time Spent</th>
       </tr>
-    <% end %>
-  </tbody>
-
-</table>
-  
-<p>Total Work: <%= total_time(@totalWork) %> </p>
-<p>Total Relax: <%= total_time(@totalRelax) %> </p>
+    </thead>
+    <tbody>
+      <% @work_records.each do |record| %>
+        <% time_spent = record.time_spent %>
+        <tr>
+          <td> <%= record.description %> </td>
+          <td> <%= (record.created_at).to_formatted_s(:long) %> </td>
+          <td> <%= (record.created_at + time_spent).to_formatted_s(:long) %> </td>
+          <td> <%= total_time(time_spent) %> </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <p>Total Work: <%= total_time(@totalWork) %> </p>
+  <%= image_tag @work_graph %>
 </div>
 
+<div>
+  <h3>Relax Summary</h3>
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>Description</th>
+        <th>Start Time</th>
+        <th>End Time</th>
+        <th>Time Spent</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @relax_records.each do |record| %>
+        <% time_spent = record.time_spent %>
+        <tr>
+          <td> <%= record.description %> </td>
+          <td> <%= (record.created_at).to_formatted_s(:long) %> </td>
+          <td> <%= (record.created_at + time_spent).to_formatted_s(:long) %> </td>
+          <td> <%= total_time(time_spent) %> </td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <p>Total Relax: <%= total_time(@totalRelax) %> </p>
+  <%= image_tag @relax_graph %>
+</div>
