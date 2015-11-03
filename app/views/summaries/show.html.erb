@@ -18,8 +18,8 @@
         <% time_spent = record.time_spent %>
         <tr>
           <td> <%= record.description %> </td>
-          <td> <%= (record.created_at).to_formatted_s(:long) %> </td>
-          <td> <%= (record.created_at + time_spent).to_formatted_s(:long) %> </td>
+          <td> <%= (record.created_at).in_time_zone("Eastern Time (US & Canada)").strftime("%D, %r") %> </td>
+          <td> <%= (record.created_at + time_spent).in_time_zone("Eastern Time (US & Canada)").strftime("%D, %r") %> </td>
           <td> <%= total_time(time_spent) %> </td>
         </tr>
       <% end %>
@@ -45,8 +45,8 @@
         <% time_spent = record.time_spent %>
         <tr>
           <td> <%= record.description %> </td>
-          <td> <%= (record.created_at).to_formatted_s(:long) %> </td>
-          <td> <%= (record.created_at + time_spent).to_formatted_s(:long) %> </td>
+          <td> <%= (record.created_at).in_time_zone("Eastern Time (US & Canada)").strftime("%D, %r") %> </td>
+          <td> <%= (record.created_at + time_spent).in_time_zone("Eastern Time (US & Canada)").strftime("%D, %r") %> </td>
           <td> <%= total_time(time_spent) %> </td>
         </tr>
       <% end %>
