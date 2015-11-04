@@ -17,4 +17,10 @@ class SummariesController < ApplicationController
     @relax_graph = pie_chart(@relax_records, "Relax Activity", "5D9BBA")
     
   end
+
+  def destroy
+    Record.find(params[:record_id]).delete
+    redirect_to user_summary_path
+
+  end
 end

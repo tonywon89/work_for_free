@@ -70,6 +70,17 @@ $free-color: #C74B42;
   height: 100%;
 }
 
+#total-work {
+  color: $work-color;
+  font-size: 30px
+}
+
+#total-relax {
+  color: $relax-color;
+  font-size: 30px;
+}
+
+
 /* miscellaneous */
 
 .debug_dump {

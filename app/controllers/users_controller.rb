@@ -6,11 +6,8 @@ class UsersController < ApplicationController
       free = FreeTime.find(current_user.free_time_id)
       free.update(free_time: params[:ftime].to_i, user_id: current_user.id)
 
-      if params[:is_work] === "true"
-        params[:is_work] = true
-      else
-        params[:is_work] = false
-      end
+      params[:is_work] = params[:is_work] === "true" ? true : false
+
       record = current_user.records.create(is_work: params[:is_work], description: params[:description], 
         time_spent: params[:stime])
       
@@ -24,9 +21,9 @@ class UsersController < ApplicationController
       if current_user.free_time_id.blank? #check if new user
 
         # Initial values for new user
-        initial_free = 2000
-        initial_work_button = "General Work 1" 
-        initial_free_button = "General Relax 1"
+        initial_free = 0
+        initial_work_button = "General Work" 
+        initial_free_button = "General Relax"
 
         free = FreeTime.create(free_time: initial_free, user_id: current_user.id)
         current_user.update(free_time_id: free.id)

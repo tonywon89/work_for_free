@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   devise_for :users
   
   resources :users, only: [:show] do 
-    resource :summary, only: [:show]
+    resource :summary, only: [:show, :destroy]
   end
   
 

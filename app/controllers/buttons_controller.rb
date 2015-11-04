@@ -7,11 +7,8 @@ class ButtonsController < ApplicationController
   end
 
   def create
-    if params[:buttons][:work_relax] === "true"
-      params[:buttons][:work_relax] = true
-    else
-      params[:buttons][:work_relax] = false
-    end
+    params[:buttons][:work_relax] = params[:buttons][:work_relax] === "true" ? true : false
+  
     WorkRelaxButton.create(is_work: params[:buttons][:work_relax], description: params[:buttons][:description],
       user_id: current_user.id)
     redirect_to current_user
@@ -26,11 +23,8 @@ class ButtonsController < ApplicationController
       @button = WorkRelaxButton.find(params[:button_id])
 
     else
-      if params[:buttons][:work_relax] === "true"
-        params[:buttons][:work_relax] = true
-      else
-        params[:buttons][:work_relax] = false
-      end
+      params[:buttons][:work_relax] = params[:buttons][:work_relax] === "true" ? true : false
+      
       button = WorkRelaxButton.find(params[:button_id])
       button.update(is_work: params[:buttons][:work_relax], description: params[:buttons][:description])
       redirect_to current_user
