@@ -1,3 +1,5 @@
+<% provide(:title, "Update Button") %>
+
 <h2>Update Button Page</h2>
 
 <p> Edit: "<%= @button.description %>" Button  </p>
@@ -11,7 +13,7 @@
 
   <div class="form-group">
     <%= f.label :description, "Description" %>
-    <%= f.text_field :description, class: 'form-control' %>
+    <%= f.text_field :description, value: @button.description, class: 'form-control' %>
   </div>
 
   <%= f.submit "Update Button", class: 'btn btn-success' %>
