@@ -11,7 +11,7 @@ class ButtonsController < ApplicationController
   
     WorkRelaxButton.create(is_work: params[:buttons][:work_relax], description: params[:buttons][:description],
       user_id: current_user.id)
-    redirect_to current_user
+    redirect_to buttons_edit_path
   end
 
   def edit 

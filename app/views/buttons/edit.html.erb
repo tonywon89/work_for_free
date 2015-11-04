@@ -2,6 +2,8 @@
 
 <div class="container"> 
   
+  <%= link_to "Add Button", buttons_new_path, class: 'btn btn-primary' %>
+
   <%= form_tag buttons_destroy_path, method: :delete do %>
     <h3 class="work-button-label" >Work Buttons</h3>
 

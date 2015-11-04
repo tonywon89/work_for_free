@@ -9,7 +9,7 @@
 <%= form_for(:buttons, url: buttons_update_path(button_id: params[:button_id]), method: :patch) do |f| %>
 
   <div class="form-group">
-    <%= f.select :work_relax, [["Work", true], ["Relax", false]], {}, {class: 'form-control input-small'} %>
+    <%= f.select :work_relax, options_for_select([["Work", true, {class: 'work-option'}], ["Relax", false, {class: 'relax-option'}]], @button.is_work), {selected: "Relax"}, {class: 'form-control input-small'} %>
   </div>
 
   <div class="form-group">
