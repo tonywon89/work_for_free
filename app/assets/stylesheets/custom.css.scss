@@ -77,6 +77,16 @@ $free-color: #C74B42;
   color: $relax-color;
 }
 
+.activity {
+  display: inline-block;
+  padding: 5px 10px 5px 10px;
+  border-left: solid 1px black;
+}
+
+.activity:first-child {
+  border-left: none;
+}
+
 /* Buttons */
 
 .input-small {
