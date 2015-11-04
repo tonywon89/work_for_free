@@ -1,11 +1,9 @@
 <% provide(:title, "Buttons") %>
 
-<h2>Edit Buttons</h2>
-
 <div class="container"> 
   
   <%= form_tag buttons_destroy_path, method: :delete do %>
-    <h5>Work Buttons</h5>
+    <h3 class="work-button-label" >Work Buttons</h3>
 
     <ul style="list-style:none">
       <% @buttons.each do |i| %>
@@ -18,7 +16,9 @@
       <% end %>
     </ul>
 
-    <h5>Relax Buttons</h5>
+    <hr/>
+
+    <h3 class="relax-button-label">Relax Buttons</h3>
     <ul style="list-style:none">
       <% @buttons.each do |i| %>
         <% if !i.is_work %>
@@ -30,6 +30,9 @@
         <% end %>
       <% end %>
     </ul>
+
+    <hr/>
+
     <%= submit_tag "Delete Selected", class: "btn btn-danger" %>
   <% end %>
 </div>
