@@ -31,7 +31,16 @@ $(document).ready(function(){
   
   //When this is clicked, the button is disabled, and the time starts.
   startButton.click(function(){
-  timer = true;
+    //stops the time when FreeTime reaches 0
+    if (freeTime == 0 && $('input[type=radio]:checked').val() == "free") {
+        clearInterval(interval);
+        alert("Out of free time. Please do some work before relaxing some more!")
+        disable(stopButton);
+        if (spentTime > 0) { activate(resetButton); }
+        return;
+    }
+
+    timer = true;
 
     // Update the counter when the interval executes, and is stored in the variable to be stopped later
     interval = setInterval(function() {
@@ -64,13 +73,16 @@ $(document).ready(function(){
       // updates the counter and FreeTime in real time
       updateAll();
 
-      //stops the time when FreeTime reaches 0
-      if (freeTime <= 0) {
+      if (freeTime == 0 && $('input[type=radio]:checked').val() == "free") {
         clearInterval(interval);
-        alert("Out of free time")
+        alert("Out of free time. Please do some work before relaxing some more!")
         disable(stopButton);
-        activate(resetButton);
-    }
+        if (spentTime > 0) { activate(resetButton); }
+       
+        return;
+    }    
+
+    
     }, 100);
     
     // Ensures only stop button is functional when the timer is running  
@@ -94,7 +106,6 @@ $(document).ready(function(){
   resetButton.click(reset);
 
   $(':radio').click(function(){
-
     // Only execute if the timer is running. Otherwise, nothing happens
     if (timer) {
       clearInterval(interval);
