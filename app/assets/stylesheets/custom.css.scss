@@ -34,6 +34,10 @@
 
 /* User show page */
 
+$work-color:  #1D804E;
+$relax-color: #5D9BBA;
+$free-color: #C74B42;
+
 @media screen and ( min-width: 992px ) {
   .border-left {
     border-left: 1px solid black;
@@ -47,8 +51,17 @@
 
 #free {
   font-size: 30px;
-  color: #36801D;
+  color: $free-color;
 }
+
+.work-label {
+  color: $work-color;
+}
+
+.relax-label {
+  color: $relax-color;
+}
+
 
 /* Summary page */
 

@@ -13,8 +13,8 @@ class SummariesController < ApplicationController
       record.is_work ? @totalWork += time_spent : @totalRelax += time_spent
     end
 
-    @work_graph = pie_chart(@work_records, "Work Activity", "FF0000")
-    @relax_graph = pie_chart(@relax_records, "Relax Activity", "3DA8CC")
+    @work_graph = pie_chart(@work_records, "Work Activity", "1D804E")
+    @relax_graph = pie_chart(@relax_records, "Relax Activity", "5D9BBA")
     
   end
 end
