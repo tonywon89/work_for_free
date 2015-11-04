@@ -15,102 +15,27 @@ var timer = false;
 // Keeps track of the radio button that is checked when the data is submitted
 var $storedButton;
 
+var interval;
   
 $(document).ready(function(){
 
   // Starts the initial counter and freetime to display.
   updateAll();
-
-  // Initializes the buttons and interval
-  var startButton = $('#start-button'), stopButton = $('#stop-button'), resetButton = $('#reset-button');
-  var interval;
-
+ 
   // Prevents the stop and reset button from being functional when timer is not running
-  disable(stopButton);
-  disable(resetButton);
+  disable($('#reset-button'));
   
   //When this is clicked, the button is disabled, and the time starts.
-  startButton.click(function(){
-    //stops the time when FreeTime reaches 0
-    if (freeTime == 0 && $('input[type=radio]:checked').val() == "free") {
-        clearInterval(interval);
-        alert("Out of free time. Please do some work before relaxing some more!")
-        disable(stopButton);
-        if (spentTime > 0) { activate(resetButton); }
-        return;
-    }
-
-    timer = true;
-
-    // Update the counter when the interval executes, and is stored in the variable to be stopped later
-    interval = setInterval(function() {
-      seconds += 1;
-      if (seconds == 10) {
-        seconds = 0;
-        tenSeconds += 1;
-        if (tenSeconds == 6) {
-          tenSeconds = 0;
-          minutes += 1;
-          if (minutes == 10) {
-            minutes = 0;
-            tenMinutes += 1;
-            if (tenMinutes == 6) {
-              tenMinutes = 0;
-              hours += 1;
-            }
-          } 
-        } 
-      }
-
-      // Updates the free time depending on whether work or relax button is selected
-      $('input[type=radio]:checked').val() == "work" ? freeTime += 1 : freeTime -= 1;
-
-      // Stores the selected radio button for data submission when reset button is clicked
-      $storedButton = $('input[type=radio]:checked')
-
-      spentTime += 1;
-
-      // updates the counter and FreeTime in real time
-      updateAll();
-
-      if (freeTime == 0 && $('input[type=radio]:checked').val() == "free") {
-        clearInterval(interval);
-        alert("Out of free time. Please do some work before relaxing some more!")
-        disable(stopButton);
-        if (spentTime > 0) { activate(resetButton); }
-       
-        return;
-    }    
-
-    
-    }, 100);
-    
-    // Ensures only stop button is functional when the timer is running  
-    disable(startButton);
-    activate(stopButton);
-    disable(resetButton);
-
-  });
-
-  //This shows what happens when the stop button is clicked
-  stopButton.click(function() {
-
-    // Stops the counter and reactivates and disables buttons
-    clearInterval(interval);
-    disable(stopButton);
-    activate(startButton);
-    activate(resetButton);
-  });
+  $('#start-button').on('click', startClick);
 
   // When the reset button is clicked, resets the counter and saves the data
-  resetButton.click(reset);
+  $('#reset-button').click(reset);
 
   $(':radio').click(function(){
     // Only execute if the timer is running. Otherwise, nothing happens
     if (timer) {
       clearInterval(interval);
-      disable(stopButton);
-      activate(resetButton);
+      activate($('#reset-button'));
       reset();
     }
   });
@@ -118,6 +43,74 @@ $(document).ready(function(){
     
 
 /* Defined Functions */
+
+function startClick() {
+    //stops the time when FreeTime reaches 0
+  if (freeTime == 0 && $('input[type=radio]:checked').val() == "free") {
+      alert("Out of free time. Please do some work before relaxing some more!")
+      disable(stopButton);
+      if (spentTime > 0) { activate($('#reset-button')); }
+      return;
+  }
+
+  timer = true;
+
+  // Update the counter when the interval executes, and is stored in the variable to be stopped later
+  interval = setInterval(function() {
+    seconds += 1;
+    if (seconds == 10) {
+      seconds = 0;
+      tenSeconds += 1;
+      if (tenSeconds == 6) {
+        tenSeconds = 0;
+        minutes += 1;
+        if (minutes == 10) {
+          minutes = 0;
+          tenMinutes += 1;
+          if (tenMinutes == 6) {
+            tenMinutes = 0;
+            hours += 1;
+          }
+        } 
+      } 
+    }
+
+    // Updates the free time depending on whether work or relax button is selected
+    $('input[type=radio]:checked').val() == "work" ? freeTime += 1 : freeTime -= 1;
+
+    // Stores the selected radio button for data submission when reset button is clicked
+    $storedButton = $('input[type=radio]:checked')
+
+    spentTime += 1;
+
+    // updates the counter and FreeTime in real time
+    updateAll();
+
+    if (freeTime == 0 && $('input[type=radio]:checked').val() == "free") {
+      clearInterval(interval);
+      alert("Out of free time. Please do some work before relaxing some more!")
+      disable(stopButton);
+      if (spentTime > 0) { activate($('#reset-button')); }
+     
+      return;
+    }    
+  }, 100);
+  
+  // Ensures only stop button is functional when the timer is running  
+  //disable($('#start-button'));
+  activate($('#stop-button'));
+  disable($('#reset-button'));
+  $("#start-button").off('click').on('click', pauseClick).text("Pause").attr("class", "btn btn-danger");
+}
+
+function pauseClick() {
+  clearInterval(interval);
+  //disable(stopButton);
+  //activate($('#start-button'));
+  activate($('#reset-button'));
+  $("#start-button").off('click').on('click', startClick).text("Start").attr("class", "btn btn-success");
+
+}
 
 // Disables the button so it cannot be clicked  
 function disable(button) {

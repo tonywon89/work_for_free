@@ -27,7 +27,7 @@ class ButtonsController < ApplicationController
       
       button = WorkRelaxButton.find(params[:button_id])
       button.update(is_work: params[:buttons][:work_relax], description: params[:buttons][:description])
-      redirect_to current_user
+      redirect_to buttons_edit_path
     end
   end
 
