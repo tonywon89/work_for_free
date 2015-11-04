@@ -44,8 +44,25 @@ $free-color: #C74B42;
   }
 }
 
+.counter-pause {
+  color: black;
+  font-size: 20px;
+  transition: color 1s, font-size 2s;
+}
+
+.counter-work {
+  color: $work-color;
+  font-size: 100px;
+  transition: color 1s, font-size 2s;
+}
+
+.counter-relax {
+  color: $relax-color;
+  font-size: 100px;
+  transition: color 1s, font-size 2s;
+}
+
 #counter {
-  font-size: 50px;
   font-family: monospace;
 }
 

@@ -81,6 +81,9 @@ function startClick() {
     // Stores the selected radio button for data submission when reset button is clicked
     $storedButton = $('input[type=radio]:checked')
 
+    $storedButton.val() == "work" ? $('#counter').attr("class", "counter-work") : $('#counter').attr("class", "counter-relax")
+    
+
     spentTime += 1;
 
     // updates the counter and FreeTime in real time
@@ -105,11 +108,8 @@ function startClick() {
 
 function pauseClick() {
   clearInterval(interval);
-  //disable(stopButton);
-  //activate($('#start-button'));
   activate($('#reset-button'));
   $("#start-button").off('click').on('click', startClick).text("Start").attr("class", "btn btn-success");
-
 }
 
 // Disables the button so it cannot be clicked  
@@ -156,6 +156,7 @@ function reset() {
 
     // Sets the timer to not be running, and inidicate that there is no data to be saved
     timer = false;
+    $('#counter').attr("class", "counter-pause");
   }
   
   // Reset the activity time to 0 
