@@ -15,7 +15,7 @@ class ButtonsController < ApplicationController
   end
 
   def edit 
-    @buttons = WorkRelaxButton.where("user_id = ?", current_user.id)
+    @buttons = current_user.work_relax_buttons
   end
 
   def update

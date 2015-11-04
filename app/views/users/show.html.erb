@@ -21,7 +21,7 @@
         <div class="text-center"> 
           <!-- Create all the work radio buttons --> 
           <% if current_user %>
-            <% @workRelaxButtons.each do |i| %>
+            <% @buttons.each do |i| %>
               <% if i.is_work %>
                 <p class="activity"><%= radio_button_tag 'work-free', 'work', true, class: i.description %> <%= i.description %></p>
               <% end %> 
@@ -34,7 +34,7 @@
         <div class="text-center">
            <!-- Create all the relax radio buttons -->
           <% if current_user %>
-            <% @workRelaxButtons.each do |i| %>
+            <% @buttons.each do |i| %>
               <% if !i.is_work %>
                 <p class="activity"><%= radio_button_tag 'work-free', 'free', false, class: i.description %> <%= i.description %> </p>
               <% end %> 
