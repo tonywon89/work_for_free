@@ -15,6 +15,8 @@ class UsersController < ApplicationController
       params.delete :is_work
       params.delete :description
       params.delete :stime
+      flash.now[:save_success] = "Activity Saved"
+      render current_user
     end
 
     if current_user

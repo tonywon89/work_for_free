@@ -22,7 +22,7 @@
           <% if current_user %>
             <% @buttons.each do |i| %>
               <% if i.is_work %>
-                <p class="activity"><%= radio_button_tag 'work-free', 'work', true, class: i.description %> <%= i.description %></p>
+                <p class="activity"><%= radio_button_tag 'work-relax', 'work', true, class: i.description %> <%= i.description %></p>
               <% end %> 
             <% end %>
           <% end %>
@@ -35,7 +35,7 @@
           <% if current_user %>
             <% @buttons.each do |i| %>
               <% if !i.is_work %>
-                <p class="activity"><%= radio_button_tag 'work-free', 'free', false, class: i.description %> <%= i.description %> </p>
+                <p class="activity"><%= radio_button_tag 'work-relax', 'relax', false, class: i.description %> <%= i.description %> </p>
               <% end %> 
             <% end %>
           <% end %>

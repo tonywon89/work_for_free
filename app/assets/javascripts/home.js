@@ -34,8 +34,7 @@ $(document).ready(function(){
   $(':radio').click(function(){
     // Only execute if the timer is running. Otherwise, nothing happens
     if (timer) {
-      clearInterval(interval);
-      activate($('#reset-button'));
+      clearInterval(interval);;
       reset();
     }
   });
@@ -45,8 +44,8 @@ $(document).ready(function(){
 /* Defined Functions */
 
 function startClick() {
-    //stops the time when FreeTime reaches 0
-  if (freeTime == 0 && $('input[type=radio]:checked').val() == "free") {
+  // Doesn't all time to start if FreeTime is 0 and the button is relax
+  if (freeTime == 0 && $('input[type=radio]:checked').val() == "relax") {
       alert("Out of free time. Please do some work before relaxing some more!")
       disable(stopButton);
       if (spentTime > 0) { activate($('#reset-button')); }
@@ -89,10 +88,9 @@ function startClick() {
     // updates the counter and FreeTime in real time
     updateAll();
 
-    if (freeTime == 0 && $('input[type=radio]:checked').val() == "free") {
+    if (freeTime == 0 && $('input[type=radio]:checked').val() == "relax") {
       clearInterval(interval);
       alert("Out of free time. Please do some work before relaxing some more!")
-      disable(stopButton);
       if (spentTime > 0) { activate($('#reset-button')); }
      
       return;
@@ -157,6 +155,8 @@ function reset() {
     // Sets the timer to not be running, and inidicate that there is no data to be saved
     timer = false;
     $('#counter').attr("class", "counter-pause");
+    $("#start-button").off('click').on('click', startClick).text("Start").attr("class", "btn btn-success");
+    //setTimeout(function(){ $('.alert').fadeOut() }, 5000)
   }
   
   // Reset the activity time to 0 
