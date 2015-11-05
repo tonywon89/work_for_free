@@ -45,11 +45,15 @@ $(document).ready(function(){
 
 function startClick() {
   // Doesn't all time to start if FreeTime is 0 and the button is relax
-  if (freeTime == 0 && $('input[type=radio]:checked').val() == "relax") {
+  if (freeTime == 0 && $('input[type=radio]:checked').val() == "relax")  {
       alert("Out of free time. Please do some work before relaxing some more!")
-      disable(stopButton);
       if (spentTime > 0) { activate($('#reset-button')); }
       return;
+  }
+
+  if ($('input[type=radio]:checked').length == 0) {
+    alert("You need to make a work or relax button!");
+    return;
   }
 
   timer = true;

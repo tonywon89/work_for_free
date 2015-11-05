@@ -1,8 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-
-
 @mixin box_sizing {
   -moz-box-sizing:    border-box;
   -webkit-box-sizing: border-box;
@@ -31,7 +29,9 @@
   margin-left: 10px;
 }
 
-
+#logged-in-user {
+  color: #0099FF;
+}
 /* User show page */
 
 $work-color:  #1D804E;

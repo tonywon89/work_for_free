@@ -24,8 +24,10 @@ class UsersController < ApplicationController
 
         # Initial values for new user
         initial_free = 0
-        initial_work_button = "General Work" 
-        initial_relax_button = "General Relax"
+        initial_work_button = "This is a Work Button. Starting the timer when this is selected with increase your free time" 
+        initial_relax_button = "This is Relax Button. Starting the timer when this is selected will decrease your free time"
+        edit_work_button = "You can edit these buttons, add your own button, or delete these buttons by clicking 'Add/edit buttons'"
+        summary_relax_button = "You can view your activity log by clicking the 'Summary' link in the navigation bar"
 
         # Creates the Free Time item associated with the user
         free = FreeTime.create(free_time: initial_free, user_id: current_user.id)
@@ -33,7 +35,10 @@ class UsersController < ApplicationController
 
         # Create initial work buttons
         current_user.work_relax_buttons.create(is_work: true, description: initial_work_button)
+        current_user.work_relax_buttons.create(is_work: true, description: edit_work_button)
         current_user.work_relax_buttons.create(is_work: false, description: initial_relax_button)
+        current_user.work_relax_buttons.create(is_work: false, description: summary_relax_button)
+
 
       end
 
