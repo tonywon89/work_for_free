@@ -87,6 +87,11 @@ $free-color: #C74B42;
   border-left: none;
 }
 
+#notice {
+ opacity: 0;
+ visibility: visible;
+}
+
 /* Buttons */
 
 .input-small {

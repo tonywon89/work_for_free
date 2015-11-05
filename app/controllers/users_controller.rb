@@ -10,13 +10,11 @@ class UsersController < ApplicationController
 
       record = current_user.records.create(is_work: params[:is_work], description: params[:description], 
         time_spent: params[:stime])
-      
-      params.delete :ftime
-      params.delete :is_work
-      params.delete :description
-      params.delete :stime
-      flash.now[:save_success] = "Activity Saved"
-      render current_user
+
+      params.each do |key, value| 
+        params.delete key
+      end
+
     end
 
     if current_user

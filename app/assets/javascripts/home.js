@@ -152,6 +152,10 @@ function reset() {
     xhttp.open("GET", url, true);
     xhttp.send();
 
+    // Fades in the alert
+    $('#notice').animate({opacity: 1.0}).text($storedButton.attr("class") + " activity saved!").delay(2000).animate({opacity: 0.0});
+
+
     // Sets the timer to not be running, and inidicate that there is no data to be saved
     timer = false;
     $('#counter').attr("class", "counter-pause");
