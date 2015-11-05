@@ -1,6 +1,6 @@
 <% provide(:title, "Summary") %>
-
-<h1>Summary</h1>
+<% user = current_user %>
+<h1 style="display: inline; margin-right: 10px">Summary</h1>  <%= link_to "Back to timer", user_path(id: user.id) %>
 <hr/>
 <% user = current_user %>
 
@@ -21,8 +21,8 @@
         <% time_spent = record.time_spent %>
         <tr>
           <td> <%= record.description %> </td>
-          <td> <%= (record.created_at).in_time_zone("Eastern Time (US & Canada)").strftime("%D, %r") %> </td>
-          <td> <%= (record.created_at + time_spent).in_time_zone("Eastern Time (US & Canada)").strftime("%D, %r") %> </td>
+          <td> <%= (record.created_at).in_time_zone(Time.now.zone).strftime("%D, %r") %> </td>
+          <td> <%= (record.created_at + time_spent).in_time_zone(Time.now.zone).strftime("%D, %r") %> </td>
           <td> <%= total_time(time_spent) %> </td>
           <td> <%= link_to "Delete", user_summary_path(user_id: user.id, record_id: record.id), method: :delete %></td>
         </tr>
@@ -52,8 +52,8 @@
         <% time_spent = record.time_spent %>
         <tr>
           <td> <%= record.description %> </td>
-          <td> <%= (record.created_at).in_time_zone("Eastern Time (US & Canada)").strftime("%D, %r") %> </td>
-          <td> <%= (record.created_at + time_spent).in_time_zone("Eastern Time (US & Canada)").strftime("%D, %r") %> </td>
+          <td> <%= (record.created_at).in_time_zone(Time.now.zone).strftime("%D, %r") %> </td>
+          <td> <%= (record.created_at + time_spent).in_time_zone(Time.now.zone).strftime("%D, %r") %> </td>
           <td> <%= total_time(time_spent) %> </td>
           <td> <%= link_to "Delete", user_summary_path(user_id: user.id, record_id: record.id), method: :delete %></td>
         </tr>
@@ -62,4 +62,5 @@
   </table>
   <p id="total-relax">Total Relax: <%= total_time(@totalRelax) %> </p>
   <%= image_tag @relax_graph %>
+  <p><%= link_to "Back to Timer", user_path(id: user.id), class: "btn btn-default" %></p>
 </div>

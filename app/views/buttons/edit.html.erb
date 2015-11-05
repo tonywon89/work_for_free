@@ -1,8 +1,6 @@
 <% provide(:title, "Buttons") %>
-
+<% user = current_user %>
 <div class="container"> 
-  
-
 
   <%= form_tag buttons_destroy_path, method: :delete do %>
     <h3 class="work-button-label" >Work Buttons</h3>
@@ -37,4 +35,5 @@
     <%= link_to "Add New Button", buttons_new_path, class: 'btn btn-info' %>
     <%= submit_tag "Delete Selected", class: "btn btn-danger" %>
   <% end %>
+  <p style="margin-top: 10px"><%= link_to "Back to Timer", user_path(id: user.id) %></p>
 </div>
