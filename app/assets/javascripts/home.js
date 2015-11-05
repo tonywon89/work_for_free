@@ -99,7 +99,7 @@ function startClick() {
      
       return;
     }    
-  }, 100);
+  }, 1000);
   
   // Ensures only stop button is functional when the timer is running  
   //disable($('#start-button'));
