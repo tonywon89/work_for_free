@@ -1,0 +1,39 @@
+<% provide(:title, "Buttons") %>
+<% user = current_user %>
+<div class="container"> 
+
+  <%= form_tag button_path(id: 1), method: :delete do %>
+    <h3 class="work-button-label" >Work Buttons</h3>
+
+    <ul style="list-style:none">
+      <% @buttons.each do |i| %>
+        <% if i.is_work %>
+          <li>
+            <%= check_box_tag "delete[#{i.id}]", i.description %> <%= i.description %> 
+            <%= link_to "Edit", edit_button_path(:id => i.id), method: :get %>
+          </li>
+        <% end %>
+      <% end %>
+    </ul>
+
+    <hr/>
+
+    <h3 class="relax-button-label">Relax Buttons</h3>
+    <ul style="list-style:none">
+      <% @buttons.each do |i| %>
+        <% if !i.is_work %>
+          <li> 
+            <%= check_box_tag "delete[#{i.id}]", i.description %> <%= i.description %> 
+            <%= link_to "Edit", edit_button_path(:id => i.id), method: :get %>
+          </li>
+
+        <% end %>
+      <% end %>
+    </ul>
+
+    <hr/>
+    <%= link_to "Add New Button", new_button_path, class: 'btn btn-info' %>
+    <%= submit_tag "Delete Selected", class: "btn btn-danger" %>
+  <% end %>
+  <p style="margin-top: 10px"><%= link_to "Back to Timer", user_path(id: user.id) %></p>
+</div>

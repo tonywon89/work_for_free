@@ -4,12 +4,14 @@ Rails.application.routes.draw do
   get 'home' => 'static_pages#home'
   get 'help' => 'static_pages#help'
 
-  get 'buttons/new'
-  get 'buttons/edit'
-  post 'buttons/create'
-  get 'buttons/update'
-  patch 'buttons/update'
-  delete 'buttons/destroy'
+  resources :buttons
+
+  #get 'buttons/new'
+  #get 'buttons/edit'
+  #post 'buttons/create'
+  #get 'buttons/update'
+  #patch 'buttons/update'
+  #delete 'buttons/destroy'
 
   devise_for :users
   

@@ -2,7 +2,7 @@
 
 <hr/>
 
-<%= form_for(:buttons, url: buttons_create_path) do |f| %>
+<%= form_for(:buttons, url: buttons_path, method: :post) do |f| %>
 
   <div class="form-group">
     <%= f.select :work_relax, [["Work", true], ["Relax", false]], {}, {class: "form-control input-small"} %>
@@ -18,3 +18,5 @@
   <%= f.submit "Create New Button", class: 'btn btn-success' %>
 
 <% end %>
+
+<%= link_to "Back to buttons", buttons_path %>
