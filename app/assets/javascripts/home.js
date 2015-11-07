@@ -102,10 +102,10 @@ function startClick() {
   }, 1000);
   
   // Ensures only stop button is functional when the timer is running  
-  //disable($('#start-button'));
-  activate($('#stop-button'));
-  disable($('#reset-button'));
-  $("#start-button").off('click').on('click', pauseClick).text("Pause").attr("class", "btn btn-danger");
+  disable($('#start-button'));
+
+  activate($('#reset-button'));
+  
 }
 
 function pauseClick() {
@@ -128,7 +128,8 @@ function activate(button) {
  * Also sends an AJAX request to server to save the free time data and activity data
  */
 function reset() {
-
+  clearInterval(interval);
+  
   // Resets the counter time
   seconds = 0, tenSeconds = 0, minutes = 0, tenMinutes = 0, hours = 0;
       
