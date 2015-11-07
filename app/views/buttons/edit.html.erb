@@ -1,7 +1,7 @@
 <% provide(:title, "Edit Button") %>
 
 <h2>Update Button</h2>
-
+<%= content_tag :p, "Description can't be blank", class: "alert alert-danger" if !@button1.blank? %>
 <p> Edit: "<%= @button.description %>" Button  </p>
 
 <hr/>

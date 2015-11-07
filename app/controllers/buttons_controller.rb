@@ -9,9 +9,12 @@ class ButtonsController < ApplicationController
 
   def create
     params[:buttons][:work_relax] = params[:buttons][:work_relax] === "true" ? true : false
-  
-    WorkRelaxButton.create(is_work: params[:buttons][:work_relax], description: params[:buttons][:description],
+    
+     @button = WorkRelaxButton.create(is_work: params[:buttons][:work_relax], description: params[:buttons][:description],
       user_id: current_user.id)
+    if @button.errors.any?
+      render(new_button_path) and return
+    end
     redirect_to buttons_path
   end
 
@@ -37,8 +40,12 @@ class ButtonsController < ApplicationController
     
     button = WorkRelaxButton.find(params[:id])
     button.update(is_work: params[:buttons][:work_relax], description: params[:buttons][:description])
+    if button.errors.any?
+      @button1 = button
+      @button = WorkRelaxButton.find(params[:id])
+      render "edit" and return
+    end
     redirect_to buttons_path
-    
   end
 
   def destroy

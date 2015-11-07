@@ -1,7 +1,7 @@
 <h2>Create a Button</h2>
 
 <hr/>
-
+<%= content_tag :p, "Description can't be blank", class: "alert alert-danger" if @button%>
 <%= form_for(:buttons, url: buttons_path, method: :post) do |f| %>
 
   <div class="form-group">
