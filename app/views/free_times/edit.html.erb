@@ -1,0 +1,12 @@
+<h2>Free Time Edit Page</h2>
+
+<p> Update Free Time for "<%= User.find(FreeTime.find(params[:id]).user_id).email %>"</p> 
+
+<%= form_for :free_time, url: free_time_path(id: params[:id]), method: :patch do |f| %>
+
+  <%= f.label :Free_Time %>
+  <%= f.text_field :free_time %>
+
+  <%= f.submit "Update Free Time", class: "btn btn-primary" %>
+
+<% end %>
