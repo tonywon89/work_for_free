@@ -1,0 +1,22 @@
+<h2>Show all user page</h2>
+
+<% @users.each do |user| %> 
+  <table class="table table-bordered">
+    <thead>
+      <tr>
+        <th>User Id</th>
+        <th>User email</th>
+        <th>Delete?</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td> <%= user.id %></td>
+        <td> <%= user.email %></td>
+        <td> <%= link_to "Delete", user_path(id: user.id), method: :delete %></td>
+      </tr>
+    </tbody>
+  
+
+  </table>
+<% end %>

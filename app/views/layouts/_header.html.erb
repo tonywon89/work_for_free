@@ -13,18 +13,24 @@
         <div class="collapse navbar-collapse" id="main-nav-collapse">
           <% user = current_user %>
           <div id="nav-buttons" class="nav navbar-nav navbar-right">
+
             <% if current_user %>
               <%= link_to "Logout", destroy_user_session_path, method: :delete, class: "btn btn-primary navbar-btn" %>
             <% else %>
               <%= link_to 'Log in', new_user_session_path, class: "btn btn-primary navbar-btn" %>
               <%= link_to 'Sign up', new_user_registration_path, class: "btn btn-success navbar-btn" %>
             <% end %>
+
           </div>
             <ul class="nav navbar-nav navbar-right">
               <li><%= link_to "How to Use", help_path %></li>
               <% if current_user %>
                 <li><%= link_to "Timer", user_path(id: user.id) %></li>
+             
                 <li><%= link_to "Summary", user_summary_path(user_id: user.id), method: :get%></li>
+                <% if current_user.try(:admin?) %>
+                  <li><%= link_to "All users", users_path %></li>
+                <% end %>
                 <li ><%= link_to current_user.email, "#", id: "logged-in-user" %></li>
               <% end %>
             
