@@ -13,13 +13,14 @@
     <tbody>
       <% @users.each do |user| %>
         <tr>
-   
+          <% if !(user.admin?) %>
           <td> <%= user.id %></td>
           <td> <%= user.email %></td>
           <td> <%= user.free_time.free_time %> <%= link_to "Edit", edit_free_time_path(id: user.free_time.id) %></td>
           <td> <%= link_to "Delete", user_path(id: user.id), method: :delete %></td>
 
         </tr>
+        <% end %>
       <% end %>
     </tbody>
   
