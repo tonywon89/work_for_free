@@ -84,6 +84,7 @@ function startClick() {
     // Stores the selected radio button for data submission when reset button is clicked
     $storedButton = $('input[type=radio]:checked')
 
+    // Sets the color of the timer when it is running to be work color or relax color
     $storedButton.val() == "work" ? $('#counter').attr("class", "counter-work") : $('#counter').attr("class", "counter-relax")
     
 
@@ -103,15 +104,8 @@ function startClick() {
   
   // Ensures only stop button is functional when the timer is running  
   disable($('#start-button'));
-
   activate($('#reset-button'));
   
-}
-
-function pauseClick() {
-  clearInterval(interval);
-  activate($('#reset-button'));
-  $("#start-button").off('click').on('click', startClick).text("Start").attr("class", "btn btn-success");
 }
 
 // Disables the button so it cannot be clicked  
@@ -134,8 +128,7 @@ function reset() {
   seconds = 0, tenSeconds = 0, minutes = 0, tenMinutes = 0, hours = 0;
       
   updateCounter();
-  activate($('#start-button'));
-  disable($('#reset-button'))
+
 
   /* Execute AJAX request only if the timer has been set to true by clicking the start button,
    * indicating that there is data to store
@@ -170,6 +163,9 @@ function reset() {
   
   // Reset the activity time to 0 
   spentTime = 0;
+
+  activate($('#start-button'));
+  disable($('#reset-button'));
 }
 
 // returns a string of the counter time

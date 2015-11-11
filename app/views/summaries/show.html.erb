@@ -4,8 +4,15 @@
 <hr/>
 <% user = current_user %>
 
+<h3>Work Summary</h3>
+
+<% if !@work_records.blank? %>
+  <p id="total-work">Total Work: <%= total_time(@totalWork) %> </p>
+  <%= image_tag @work_graph %>
+<% end %>
+
 <div>
-  <h3>Work Summary</h3>
+
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -29,14 +36,19 @@
       <% end %>
     </tbody>
   </table>
-  <p id="total-work">Total Work: <%= total_time(@totalWork) %> </p>
-  <%= image_tag @work_graph %>
+
 </div>
 
 <hr/>
+<h3>Relax Summary</h3>
+
+<% if !@relax_records.blank? %>
+  <p id="total-relax">Total Relax: <%= total_time(@totalRelax) %> </p>
+  <%= image_tag @relax_graph %>
+<% end %>
 
 <div>
-  <h3>Relax Summary</h3>
+
   <table class="table table-bordered">
     <thead>
       <tr>
@@ -60,7 +72,6 @@
       <% end %>
     </tbody>
   </table>
-  <p id="total-relax">Total Relax: <%= total_time(@totalRelax) %> </p>
-  <%= image_tag @relax_graph %>
+
   <p><%= link_to "Back to Timer", user_path(id: user.id), class: "btn btn-default" %></p>
 </div>

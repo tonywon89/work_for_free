@@ -1,9 +1,11 @@
 <% provide(:title, "Timer") %>
+<% user = current_user %>
 <p id="notice" class="alert alert-success"></p>
 <div class="container text-center">
   <p id="counter" class="counter-pause"></p>
   <button id="start-button" type="button" class="btn btn-success">Start</button>
   <button id="reset-button" type="button" class="btn btn-primary">Reset/Save</button>
+  <%= link_to "Summary", user_summary_path(user_id: user.id), class: "btn btn-info", id: "summary-button" %>
 </div>
 <hr/>
 

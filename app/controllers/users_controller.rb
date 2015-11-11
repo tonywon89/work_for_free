@@ -50,9 +50,8 @@ class UsersController < ApplicationController
 
         # Create initial work buttons
         current_user.work_relax_buttons.create(is_work: true, description: initial_work_button)
-        current_user.work_relax_buttons.create(is_work: true, description: edit_work_button)
         current_user.work_relax_buttons.create(is_work: false, description: initial_relax_button)
-        current_user.work_relax_buttons.create(is_work: false, description: summary_relax_button)
+
 
 
       end
