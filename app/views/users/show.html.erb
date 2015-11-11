@@ -1,36 +1,46 @@
 <% provide(:title, "Timer") %>
 <% user = current_user %>
-<p id="notice" class="alert alert-success"></p>
-<div class="container text-center">
-  <p id="counter" class="counter-pause"></p>
-  <button id="start-button" type="button" class="btn btn-success">Start</button>
-  <button id="reset-button" type="button" class="btn btn-primary">Reset/Save</button>
-  <%= link_to "Summary", user_summary_path(user_id: user.id), class: "btn btn-info", id: "summary-button" %>
-</div>
-<hr/>
-
-<div class="text-center">
-  <h3>Free Time Stored:</h3>
-  <div><span id="free"></span> </div>
-</div>
-<hr/>
-
 <div class="container">
-  <div class="row">
-    <div class="col-md-6">
-        <h3 class="text-center work-label"> Work </h3>
-        <div class="work-buttons text-center">
-          <!-- Create all the work radio buttons --> 
-          <% if current_user %>
-            <% @buttons.each do |i| %>
-              <% if i.is_work %>
-                <p class="activity"><%= radio_button_tag 'work-relax', 'work', true, class: i.description %> <%= i.description %></p>
-              <% end %> 
+  <div id="instructions" class=" collapse" data-toggle="collapse">
+    <ol>
+      <li> Press "start" to start the timer, and reset to save the data. If the timer is already started and you switch your activity, it will automatically reset the timer and save the data.</li>
+
+      <li> You can add, edit, or delete buttons by clicking the "Add/Edit Button". </li>
+
+      <li> Click on the Summary button to view your activity log (if the timer is running, make sure you save the data first). You can delete individual entries if you no longer want to keep track of it.</li>
+
+    </ol>
+  </div>
+  <p id="notice" class="alert alert-success"></p>
+  <a href="#instructions" data-toggle="collapse" aria-expanded="false" aria-controls="instructions">
+  <div class="text-center">
+  Show/Hide Instructions</a>
+    <p id="counter" class="counter-pause"></p>
+    <button id="start-button" type="button" class="btn btn-success">Start</button>
+    <button id="reset-button" type="button" class="btn btn-primary">Reset/Save</button>
+    <%= link_to "Summary", user_summary_path(user_id: user.id), class: "btn btn-info", id: "summary-button" %>
+  </div>
+  <hr/>
+  <div class="text-center">
+    <h3>Free Time Stored:</h3>
+    <div><span id="free"></span> </div>
+  </div>
+  <hr/>
+    <div class="row">
+      <div class="col-md-6">
+          <h3 class="text-center work-label"> Work </h3>
+          <div class="work-buttons text-center">
+            <!-- Create all the work radio buttons --> 
+            <% if current_user %>
+              <% @buttons.each do |i| %>
+                <% if i.is_work %>
+                  <p class="activity"><%= radio_button_tag 'work-relax', 'work', true, class: i.description %> <%= i.description %></p>
+                <% end %> 
+              <% end %>
             <% end %>
-          <% end %>
-        </div>
-    </div>
-    <div class="col-md-6 border-left">
+          </div>
+      </div>
+      <div class="col-md-6 border-left">
         <h3 class="text-center relax-label"> Relax </h3>
         <div class="relax-buttons text-center">
            <!-- Create all the relax radio buttons -->
@@ -42,17 +52,16 @@
             <% end %>
           <% end %>
         </div>
+      </div>
     </div>
-  </div>
-  
-</div>
 
-<hr/>
+  <hr/>
 
-<div class="container">
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
-      <%= link_to "Add/Edit Buttons", buttons_path, class: 'btn btn-warning btn-block' %>
+
+    <div class="row">
+      <div class="col-md-6 col-md-offset-3">
+        <%= link_to "Add/Edit Buttons", buttons_path, class: 'btn btn-warning btn-block' %>
+      </div>
     </div>
-  </div>
+
 </div>
