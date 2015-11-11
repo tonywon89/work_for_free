@@ -7,8 +7,14 @@
 <h3>Work Summary</h3>
 
 <% if !@work_records.blank? %>
+ 
+  <div>
+      <a href="#work-graph" data-toggle="collapse" aria-expanded="false" aria-controls="work-graph"> Show/Hide Graph</a>
+      <div id="work-graph" class="collapse in" data-toggle="collapse">
+        <%= image_tag @work_graph %>
+      </div>
+  </div>
   <p id="total-work">Total Work: <%= total_time(@totalWork) %> </p>
-  <%= image_tag @work_graph %>
 <% end %>
 
 <div>
@@ -28,8 +34,8 @@
         <% time_spent = record.time_spent %>
         <tr>
           <td> <%= record.description %> </td>
-          <td> <%= (record.created_at).in_time_zone(Time.now.zone).strftime("%D, %r") %> </td>
-          <td> <%= (record.created_at + time_spent).in_time_zone(Time.now.zone).strftime("%D, %r") %> </td>
+          <td> <%= (record.created_at).in_time_zone("EST").strftime("%D, %r") %> </td>
+          <td> <%= (record.created_at + time_spent).in_time_zone("EST").strftime("%D, %r") %> </td>
           <td> <%= total_time(time_spent) %> </td>
           <td> <%= link_to "Delete", user_summary_path(user_id: user.id, record_id: record.id), method: :delete %></td>
         </tr>
@@ -43,8 +49,13 @@
 <h3>Relax Summary</h3>
 
 <% if !@relax_records.blank? %>
+  <div>
+    <a href="#relax-graph" data-toggle="collapse" aria-expanded="false" aria-controls="work-graph"> Show/Hide Graph</a>
+    <div id="relax-graph" class="collapse in" data-toggle="collapse">
+      <%= image_tag @relax_graph %>
+    </div>
+  </div>
   <p id="total-relax">Total Relax: <%= total_time(@totalRelax) %> </p>
-  <%= image_tag @relax_graph %>
 <% end %>
 
 <div>
@@ -64,8 +75,8 @@
         <% time_spent = record.time_spent %>
         <tr>
           <td> <%= record.description %> </td>
-          <td> <%= (record.created_at).in_time_zone(Time.now.zone).strftime("%D, %r") %> </td>
-          <td> <%= (record.created_at + time_spent).in_time_zone(Time.now.zone).strftime("%D, %r") %> </td>
+          <td> <%= (record.created_at).in_time_zone("EST").strftime("%D, %r") %> </td>
+          <td> <%= (record.created_at + time_spent).in_time_zone("EST").strftime("%D, %r") %> </td>
           <td> <%= total_time(time_spent) %> </td>
           <td> <%= link_to "Delete", user_summary_path(user_id: user.id, record_id: record.id), method: :delete %></td>
         </tr>
