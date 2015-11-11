@@ -102,12 +102,10 @@ $free-color: #C74B42;
 .activity {
   display: inline-block;
   padding: 5px 10px 5px 10px;
-  border-left: solid 1px black;
+  font-size: 15px;
+
 }
 
-.activity:first-child {
-  border-left: none;
-}
 
 #notice {
  opacity: 0;
