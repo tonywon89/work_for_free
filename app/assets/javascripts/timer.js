@@ -156,9 +156,6 @@ function reset() {
 
     // Sets the timer to not be running, and inidicate that there is no data to be saved
     timer = false;
-    $('#counter').attr("class", "counter-pause");
-    $("#start-button").off('click').on('click', startClick).text("Start").attr("class", "btn btn-success");
-    //setTimeout(function(){ $('.alert').fadeOut() }, 5000)
   }
   
   // Reset the activity time to 0 
